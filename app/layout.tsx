@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 // These styles apply to every route in the application
-import './globals.css'
+import './globals.css';
+import 'easymde/dist/easymde.min.css';
 
 const workSans = localFont({
   src:[
@@ -55,8 +56,8 @@ const workSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Next Startup",
-  description: "Your next startup",
+  title: "Pathak/Reader",
+  description: "Write Your Thought About Books You Read",
 };
 
 export default function RootLayout({
