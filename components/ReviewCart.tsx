@@ -2,10 +2,14 @@ import { EyeIcon } from "lucide-react"
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { formatDate } from "@/lib/utils";
+import { Author, Reviewer, Thought } from "@/sanity/types";
 
-export type StartupTypeCard = Omit<Startup, "reviewer"> & { reviewer?: Reviewer };
+export type ReviewTypeCard = Omit<Thought, "reviewer" | "author"> & {
+  reviewer?:Reviewer, author?: Author} 
 
-export const StartupCart = ({post}:{post:StartupTypeCard}) => {
+
+export const ReviewCart = ({post}:{post:ReviewTypeCard}) => {
   const {
     _createdAt,
     views,
@@ -18,9 +22,9 @@ export const StartupCart = ({post}:{post:StartupTypeCard}) => {
     description,
   } = post;
   return (
-    <li className="startup-card group hover:shadow-gray-500">
+    <li className="startup-card group hover:shadow-blue-500">
       <div className="flex-between">
-        <p className="startup-card_date">{_createdAt}</p>
+        <p className="startup-card_date">{formatDate(_createdAt)}</p>
         <div className="flex gap-1.5">
           <EyeIcon className="size-6 text-primary " />
           <span className="text-16-medium">{views}</span>

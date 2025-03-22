@@ -1,5 +1,5 @@
 import SearchForm from "@/components/SearchForm";
-import { StartupCart } from "@/components/StartupCart";
+import { ReviewCart, ReviewTypeCard } from "@/components/ReviewCart";
 import { client } from "@/sanity/lib/client";
 import { THOUGHTS_QUERY } from "@/sanity/lib/queries/thought";
 
@@ -36,8 +36,8 @@ export default async function Home({searchParams}:{searchParams: Promise<{query?
           {query? `Search results for "${query}"` : "Latest Thoughts"}
         </p>
         <ul className="mt-7 card_grid">
-          {posts?.length>0?posts.map((post, index) => (
-            <StartupCart key={post?._id} post={post} />
+          {posts?.length>0?posts.map((post:ReviewTypeCard, index) => (
+            <ReviewCart key={post?._id} post={post} />
           )):`No Thoughts found`}
         </ul>
       </section>
