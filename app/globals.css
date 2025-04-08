@@ -147,7 +147,9 @@
 
   /* review card */
   .startup-card {
-    @apply bg-white border-[5px] border-black py-6 px-5 rounded-[22px]  transition-all duration-500 hover:shadow-lg hover:bg-blue-300 hover:border-blue-500;
+    @apply  border-[5px] py-6 px-5 rounded-[22px]  transition-all duration-500 hover:shadow-lg hover:bg-blue-300 hover:border-blue-500;
+    background-color: #f5ecd9;
+    border-color: #ead19b
   }
 
   .startup-card_date {

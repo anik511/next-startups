@@ -1,13 +1,13 @@
 import SearchForm from "@/components/SearchForm";
 import { ReviewCart, ReviewTypeCard } from "@/components/ReviewCart";
-import { client } from "@/sanity/lib/client";
 import { THOUGHTS_QUERY } from "@/sanity/lib/queries/thought";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 
 export default async function Home({searchParams}:{searchParams: Promise<{query?: string}>}) {
   const query = (await searchParams).query;
-  
-  const posts = await client.fetch(THOUGHTS_QUERY)
+  const params = {search: query||null};
+  const {data:posts} = await sanityFetch({query: THOUGHTS_QUERY, params});
   console.log(JSON.stringify(posts));
   
   // const posts = [
@@ -41,6 +41,7 @@ export default async function Home({searchParams}:{searchParams: Promise<{query?
           )):`No Thoughts found`}
         </ul>
       </section>
+      <SanityLive />
     </>
   );
 }

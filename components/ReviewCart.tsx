@@ -1,4 +1,4 @@
-import { EyeIcon } from "lucide-react"
+import { EyeIcon, BookHeart, ThumbsDown } from "lucide-react"
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,8 @@ export const ReviewCart = ({post}:{post:ReviewTypeCard}) => {
   const {
     _createdAt,
     views,
+    likes,
+    dislikes,
     reviewer,
     title,
     author,
@@ -25,6 +27,18 @@ export const ReviewCart = ({post}:{post:ReviewTypeCard}) => {
     <li className="startup-card group hover:shadow-blue-500">
       <div className="flex-between">
         <p className="startup-card_date">{formatDate(_createdAt)}</p>
+        { likes?
+        <div className="flex gap-1.5">
+          <BookHeart className="size-6 text-primary " />
+          <span className="text-16-medium">{likes}</span>
+        </div>:''
+        }
+        { dislikes?
+        <div className="flex gap-1.5">
+          <ThumbsDown className="size-6 text-primary " />
+          <span className="text-16-medium">{dislikes}</span>
+        </div>
+        :''}
         <div className="flex gap-1.5">
           <EyeIcon className="size-6 text-primary " />
           <span className="text-16-medium">{views}</span>
@@ -53,9 +67,8 @@ export const ReviewCart = ({post}:{post:ReviewTypeCard}) => {
         </Link>
       </div>
 
-      <Link href={`/startup/${_id}`}>
+      <Link href={`/thought/${_id}`}>
         <p className="startup-card_desc">{description}</p>
-
         <img src={image} alt="placeholder" className="startup-card_img" />
       </Link>
 
@@ -64,7 +77,7 @@ export const ReviewCart = ({post}:{post:ReviewTypeCard}) => {
           <p className="text-16-medium">{category}</p>
         </Link>
         <Button className="startup-card_btn" asChild>
-          <Link href={`/startup/${_id}`}>Details</Link>
+          <Link href={`/thought/${_id}`}>Details</Link>
         </Button>
       </div>
     </li>
