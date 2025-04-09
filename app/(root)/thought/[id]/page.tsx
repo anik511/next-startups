@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
+import { BookHeart, ThumbsDown } from "lucide-react";
 
 export const experimental_ppr = true;
 
@@ -14,39 +15,52 @@ const Thought = async ({params}:{params: Promise<{ id: string }> }) => {
   if (!post) return notFound();
   return (
     <>
-      <section className="pink_container !min-h-[230px]">
-        <p className="tag">{formatDate(post?._createdAt)}</p>
+      <div className="max-w-4xl mx-auto p-6  shadow-md rounded-2xl my-10" style={{ backgroundColor: "#f5ecd9" }}>
+        <img src={post.image} alt={post.title} className="w-full h-130 object-cover rounded-xl" />
+        
+        <div className="mt-4 flex justify-between items-center text-sm text-gray-500">
+          <span className="startup-card_date">{formatDate(post?._createdAt)}</span>
+          <span>{post.category}</span>
+          <span>{post.views} views</span>
+        </div>
+        
+        <h1 className="text-3xl font-bold text-gray-900 mt-2">{post.title}</h1>
+        <Link href={`/author/${post.author?._id}`}>
+          <p className="text-md text-gray-700">by <span className="font-semibold">{post.author.name}</span></p>
+        </Link>
+        <p className="text-lg mt-2 text-gray-700">{post.description}</p>
 
-        <h1 className="heading">{post.title}</h1>
-        <p className="sub-heading !max-w-5xl">{post.description}</p>
-      </section>
-
-      <section className="section_container">
-        <img src={post.image} alt="thumbnail" className="w-full h-auto rounded-xl" />
-
-        <div className="space-y-5 mt-10 max-w-4xl mx-auto">
-          <div className="flex-between gap-5">
-            <Link
-              href={`/user/${post.author?._id}`}
-              className="flex gap-2 items-center mb-3"
-            >
-              <div>
-                <p className="text-20-medium">{post.author.name}</p>
-                <p className="text-16-medium !text-black-300">
-                  @{post.author.username}
-                </p>
-              </div>
-            </Link>
-
-            <p className="category-tag">{post.category}</p>
+        <div className="flex gap-4 mt-6 text-gray-600 text-sm">
+          <div className="flex gap-1.5">
+            <BookHeart className="size-6 text-primary " />
+            <span className="text-14-medium">{post.likes}</span>
           </div>
-
-          <h3 className="text-30-bold">Pitch Details</h3>
-          
+          <div className="flex gap-1.5">
+            <ThumbsDown className="size-6 text-primary " />
+            <span className="text-14-medium">{post.dislikes}</span>
+          </div>
         </div>
 
-        <hr className="divider" />
-      </section>
+        <div className="mt-6 flex items-center gap-4 border-t pt-4">
+          <Link href={`/user/${post.reviewer._id}`}>
+            <Image
+              src={post.reviewer.image!}
+              alt={post.reviewer.name!}
+              width={48}
+              height={48}
+              className="rounded-full"
+            />
+          </Link>
+          
+          
+          <div>
+            <Link href={`/user/${post.reviewer._id}`}>
+              <p className="font-semibold text-gray-800">{post.reviewer.name}</p>
+            </Link>
+            <p className="text-gray-600 text-sm">{post.reviewer.bio}</p>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

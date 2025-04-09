@@ -52,7 +52,7 @@ export const ReviewCart = ({post}:{post:ReviewTypeCard}) => {
           <Link href={`/startup/${_id}`}>
             <h3 className="text-26-semibold line-clamp-1">{title}</h3>
           </Link>
-          <Link href={`/user/${author?._id}`}>
+          <Link href={`/author/${author?._id}`}>
             <p className="text-16-medium line-clamp-1"><strong>{author?.name}</strong></p>
           </Link>
         </div>
