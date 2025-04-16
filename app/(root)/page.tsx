@@ -8,7 +8,7 @@ export default async function Home({searchParams}:{searchParams: Promise<{query?
   const query = (await searchParams).query;
   const params = {search: query||null};
   const {data:posts} = await sanityFetch({query: THOUGHTS_QUERY, params});
-  console.log(JSON.stringify(posts));
+  console.log(posts);
   
   // const posts = [
   //   {
